@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @topic.title %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @topic.content %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @topic.user.email %>
+</p>
+
+<%= link_to 'Edit', edit_topic_path(@topic) %> |
+<%= link_to 'Back', topics_path %>
+
+<h3>Comments:</h3>
+
+<%= form_for([@topic, Comment.new]) do |f| %>
+  <%= f.text_area :content %>
+  <%= f.hidden_field :user_id, value: current_user.id if current_user.present? %>
+  <%= f.submit %>
+<% end %>
+
+<%= render partial: 'comments/comment', collection: @comments, :as => :comment %>
