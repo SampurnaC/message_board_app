@@ -1,0 +1,20 @@
+%p#notice= notice
+%p
+  %strong Title:
+  = @topic.title
+%p
+  %strong Content:
+  = @topic.content
+%p
+  %strong User:
+  = @topic.user.email
+= link_to 'Edit', edit_topic_path(@topic)
+|
+= link_to 'Back', topics_path
+%h3 Comments:
+= form_for([@topic, Comment.new]) do |f|
+  = f.text_area :content
+  = f.hidden_field :user_id, value: current_user.id if current_user.present?
+  = f.submit
+= render partial: 'comments/comment', collection: @comments, :as => :comment
+
