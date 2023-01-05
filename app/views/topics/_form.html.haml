@@ -1,19 +1,12 @@
-= form_with(model: topic) do |form|
-  - if topic.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(topic.errors.count, "error")
-        prohibited this topic from being saved:
-      %ul
-        - topic.errors.each do |error|
-          %li= error.full_message
-  .field
-    = form.label :title
-    = form.text_field :title
-  .field
-    = form.label :content
-    = form.text_area :content
-  = form.hidden_field :user_id, value: current_user.id
-  .actions
+.container
+  %h2 Create New Topic
+  = form_with(model: topic) do |form|
+    .form-group
+      %label{for: "email"} Email:
+      = form.text_field :title, :class => "form-control", :placeholder => "Enter email"
+    .form-group
+      %label{for: "content"} Content:
+      = form.text_field :content, :class => "form-control", :placeholder => "Enter your content"
+    = form.hidden_field :user_id, value: current_user.id
     = form.submit
-
+    = link_to 'Back', topics_path
