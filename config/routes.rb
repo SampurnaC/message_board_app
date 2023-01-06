@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :topics do
     resources :comments, only: [:create, :show, :destroy]
   end
+
+  resources :likes, only: [:create, :destroy]
   devise_for :users
 
   root 'topics#index'
