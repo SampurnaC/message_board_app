@@ -12,11 +12,18 @@
 |
 = link_to 'Back', topics_path
 
+= @topic.likes.count
+-if like.nil?
+  %form{action: "/likes", method: "post"}
+    %input{name: "authenticity_token", type: "hidden", value: form_authenticity_token}
+    %input{name: "like[topic_id]", type: "hidden", value: "#{@topic.id}"}
+    %input{type: "submit", value: "Like"}
+- else
+  %form{action: "#{like_path(like)}", method: "post"}
+    %input{name: "authenticity_token", type: "hidden", value: form_authenticity_token}
+    %input{type: "hidden", name: "_method", value: "DELETE"}
 
-%form{action: "/likes", method: "post"}
-  %input{name: "authenticity_token", type: "hidden", value: form_authenticity_token}
-  %input{name: "like[topic_id]", type: "hidden", value: "#{@topic.id}"}
-  %input{type: "submit", value: "Like"}
+    %input{type: "submit", value: "Unlike"}
 
 %h3 Comments:
 = form_for([@topic, Comment.new]) do |f|
