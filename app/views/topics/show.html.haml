@@ -11,6 +11,13 @@
 = link_to 'Edit', edit_topic_path(@topic)
 |
 = link_to 'Back', topics_path
+
+
+%form{action: "/likes", method: "post"}
+  %input{name: "authenticity_token", type: "hidden", value: form_authenticity_token}
+  %input{name: "like[topic_id]", type: "hidden", value: "#{@topic.id}"}
+  %input{type: "submit", value: "Like"}
+
 %h3 Comments:
 = form_for([@topic, Comment.new]) do |f|
   = f.text_area :content
