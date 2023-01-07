@@ -13,6 +13,7 @@
 = link_to 'Back', topics_path
 
 = @topic.likes.count
+- like = current_user.likes.find_by(topic: @topic)
 -if like.nil?
   %form{action: "/likes", method: "post"}
     %input{name: "authenticity_token", type: "hidden", value: form_authenticity_token}
