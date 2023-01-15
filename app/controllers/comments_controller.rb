@@ -8,9 +8,10 @@ class CommentsController < ApplicationController
     @comment = @topic.comments.create(comment_params)
 
     if @comment.save
-      redirect_to root_path
+      redirect_to topic_path(@topic)
+
     else
-      render :new
+      flash[:notice] = @comment.errors.full_messages.to_sentence
     end
   end
 
