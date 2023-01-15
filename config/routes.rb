@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  get 'comments/new'
-  get 'comments/show'
+  # get 'comments/new'
+  # get 'comments/show'
   resources :topics do
     resources :comments, only: [:create, :show, :destroy]
   end
