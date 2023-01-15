@@ -8,8 +8,9 @@ class TopicsController < ApplicationController
 
   # GET /topics/1 or /topics/1.json
   def show
-    @topic = Topic.find(params[:id])
-    @comments = @topic.comments
+    # @topic = Topic.find(params[:id])
+    @comments = @topic.comments.includes(:user)
+    # = render @topic.comments
   end
 
   # GET /topics/new
