@@ -1,0 +1,10 @@
+%form{action: "#{topic_comments_path(topic)}", method: "post"}
+  %input{type: "hidden", name: "authenticity_token", value: form_authenticity_token}
+  
+  - if parent.present?
+    %input{type: "hidden", name: "comment[parent_id]", value: "#{parent.id}"}
+
+  %textarea{name: "comment[content]", rows: "8", cols: "40"}
+  %input{name: "comment[user_id]", type: "hidden", value: "#{current_user.id if current_user.present?}"}
+
+  %input{type: "submit", value: "Submit"}
