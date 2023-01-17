@@ -1,6 +1,17 @@
 %div
   %p= comment.content
   %small by #{comment.user.email}
+  %a{href: "#", class: "comment-form-display"}Reply
+  .comment-form
+    = render partial: 'comments/form', locals: {topic: comment.topic, parent: comment}
+  %hr  
+  .sub-comment
+    = render partial: comment.comments
 
-  = render partial: comment.comments
-
+:javascript
+  document.querySelectorAll('.comment-form-display').forEach((el)=>
+    el.addEventListener('click', (ev)=>{
+      ev.preventDefault();
+      el.nextElementSibling.style="display: block;"
+    })
+  )
